@@ -27,7 +27,7 @@ Let use it to log the command.
 ```typescript
 let nextOrderId = 0;
 
-export async function action() {
+export async function action({ request }: ActionFunctionArgs) {
   const form = await request.formData();
   const size = form.get('size');
   const toppings = form.getAll('toppings');

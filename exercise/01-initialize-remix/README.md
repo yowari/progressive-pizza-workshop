@@ -6,6 +6,10 @@ You can initialize a Remix project using the [create-remix CLI](https://remix.ru
 npx create-remix@latest
 ```
 
-Next, go to the project directory and launch
+Next, go to the project directory and launch the app
+
+```
+npm run dev
+```
 
 Congratulation! you have your application available on http://localhost:3000

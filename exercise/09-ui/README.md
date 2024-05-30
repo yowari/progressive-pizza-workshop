@@ -20,13 +20,10 @@ Replace the template in `app/routes/_index.tsx` with the following one
         Remixez votre pizza
       </Text>
 
-      <PizzaPreview toppings={toppings} />
-
       <Form
         id="pizza-form"
         method="POST"
         action="?index"
-        onChange={handleFormChange}
       >
         <fieldset className="my-4">
           <Text className="mb-4" as="legend" size="lg" weight="bold">

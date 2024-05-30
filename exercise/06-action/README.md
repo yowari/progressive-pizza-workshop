@@ -10,33 +10,33 @@ update the form tag to have `action="?index"`
 <form method="POST" action="?index">
 ```
 
-Now, to handle the form submition, export a function named action. Remix will automatically call the function on
-POST call (non GET) on the corresponding url.
+Now, to handle the form submission, export a function named `action`. Remix will automatically call this function for any
+POST call (not GET) on the corresponding url.
 
 ```typescript
 export function action() {
-  console.log('form submitted !');
+  console.log("form submitted !");
   return null;
 }
 ```
 
-The action function can have the request informations as argument. The request contains the user form inputs.
+The action function receives the request information as an argument. The request contains the user form input data.
 
-Let use it to log the command.
+Let's use it to log the order.
 
 ```typescript
 let nextOrderId = 0;
 
-export async function action() {
+export async function action({ request }: ActionFunctionArgs) {
   const form = await request.formData();
-  const size = form.get('size');
-  const toppings = form.getAll('toppings');
+  const size = form.get("size");
+  const toppings = form.getAll("toppings");
 
   const orderId = nextOrderId++;
 
   console.log(
     `[order #${orderId}] Ordering a ${size} pizza` +
-      (toppings.length > 0 ? ` with ${toppings.join(', ')}!` : '')
+      (toppings.length > 0 ? ` with ${toppings.join(", ")}!` : "")
   );
 
   return null;
@@ -44,8 +44,8 @@ export async function action() {
 ```
 
 The returned value will be sent as an HTTP Response. We can construct and return a Response object.
-Construct and return a Response with `302` status to redirect to the confirmation page. This will be
-interpreted by the browser.
+Construct and return a Response with `302` status to redirect to the confirmation page. This response will be
+interpreted by the browser and redirect.
 
 ```typescript
 export async function action() {
@@ -53,13 +53,13 @@ export async function action() {
   return new Response(null, {
     status: 302,
     headers: {
-        Location: `/confirmation?orderId=${orderId}`,
+      Location: `/confirmation?orderId=${orderId}`,
     },
   });
 }
 ```
 
-Remix provide a helper function that shorten all of this.
+Remix provides a helper function that makes this operation less verbose.
 
 ```typescript
 export async function action() {
@@ -68,36 +68,37 @@ export async function action() {
 }
 ```
 
-Before you go further, let do an experiment. Once the form page load, when you submit without modifying anything you
+Before you go any further, let's do an experiment. Once the form page load, when you submit without selecting anything you
 can see that you get redirected to the confirmation page. To prevent this, you need some form validation check.
 
-In our case, the required form element that we want to be defined is the size. Add the condition that checks wether
+In our case, the required form element that we want to be defined is the size. So let's add the condition that checks wether
 the form input is defined in the action function.
 
 ```typescript
 export async function action({ request }: ActionFunctionArgs) {
   const form = await request.formData();
-  const size = form.get('size');
-  const toppings = form.getAll('toppings');
+  const size = form.get("size");
+  const toppings = form.getAll("toppings");
 
   // form validation
   if (!size) {
-    return { errors: { size: 'Veuillez selectionnez la taille de votre pizza' } };
+    return {
+      errors: { size: "Veuillez selectionnez la taille de votre pizza" },
+    };
   }
 
   const orderId = nextOrderId++;
   console.log(
     `[order #${orderId}] Ordering a ${size} pizza` +
-      (toppings.length > 0 ? ` with ${toppings.join(', ')}!` : '')
+      (toppings.length > 0 ? ` with ${toppings.join(", ")}!` : "")
   );
 
   return redirect(`/confirmation?orderId=${orderId}`);
 }
 ```
 
-You can see here that we are checking the size form input (the input radio) and return an object with the validation error
-message. This object we need to retrieve it on the component and display a sweet message. Remix provide a hook `useActionData`
-that simply returns what we return on the action function.
+You can see here that we are checking the size form input (the input radio) and return an object with the
+validation error message. We need to retrieve this object from the component and display some feedback. Remix provides the `useActionData` hook that simply returns what we return from the action function.
 
 ```tsx
 export default function Index() {
@@ -106,7 +107,7 @@ export default function Index() {
 
   return (
     <main>
-    {/* ... */}
+      {/* ... */}
       <fieldset>
         <legend>Selectionnez la taille</legend>
 
@@ -125,13 +126,14 @@ export default function Index() {
           Large
         </label>
 
+        {/* display the error message */}
         {actionData?.errors?.size && (
           <p>
             <em>{actionData?.errors?.size}</em>
           </p>
-         )}
+        )}
       </fieldset>
-    {/* ... */}
+      {/* ... */}
     </main>
   );
 }

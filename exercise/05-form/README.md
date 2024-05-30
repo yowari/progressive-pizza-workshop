@@ -2,9 +2,9 @@
 
 The customer need to select the pizza size and the toppings.
 
-The Remix way for managing user interaction is the html way of doing.
+The Remix way for managing user interaction is as close to web standards as possible.
 
-In `app/routes/_index.tsx`, create a form that contains radio input for size selection and
+In `app/routes/_index.tsx`, create a form that contains a radio input for size selection and
 checkbox inputs for toppings selection.
 
 ```jsx
@@ -44,7 +44,7 @@ checkbox inputs for toppings selection.
       </label>
 
       {/* do the same and create checkboxes for: bacon, basil, chili, mozzarella, mushroom, olive, onion, pepper, pepperoni, sweetcorn, tomato */}
-
-      <button type="submit">Commander</button>
+    </fieldset>
+    <button type="submit">Commander</button>
   </form>
 ```

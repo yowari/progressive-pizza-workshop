@@ -1,10 +1,8 @@
 # 03. Routing
 
-Remix is a file based routing which means that the url is based on the file name. Each route is specified by
-a file located in `app/routes`. The displayed component need to be default exported.
+Remix uses file based routing which means that the url is based on the file name. Each route is specified by a file located in `app/routes`. The route file needs at least a default exported function that returns a React Node.
 
-For our pizza app, we need 2 pages: the first one is where the user specify the pizza size and toppings,
-the second is used to display a confirmation message.
+For our pizza app, we need 2 pages: the first one is where the user specify the pizza size and toppings, the second is used to display a confirmation message.
 
 Replace the template `app/routes/_index.tsx`
 
@@ -36,5 +34,5 @@ export default function Confirmation() {
 }
 ```
 
-If you want to learn more on the convention used by Remix, you can check the
+If you want to learn more about the convention used by Remix, you can check the
 [visualization](https://interactive-remix-routing-v2.netlify.app) done by Dilum Sanjaya.

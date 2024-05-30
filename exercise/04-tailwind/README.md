@@ -1,6 +1,7 @@
 # 04. Tailwind
 
-Since Remix uses Vite, most of the setup of Tailwind CSS is the same as setup it on Vite project.
+To style our project we'd like to use Tailwind CSS.
+Since Remix uses Vite, most of the setup of Tailwind CSS is the same as the setup on the Vite project.
 
 ```
 npm install -D tailwindcss postcss autoprefixer
@@ -10,15 +11,15 @@ npx tailwindcss init --ts -p
 In `tailwind.config.ts`, add the paths of the template files
 
 ```typescript
-import type { Config } from 'tailwindcss'
+import type { Config } from "tailwindcss";
 
 export default {
-  content: ['./app/**/*.{js,jsx,ts,tsx}'], // Add the template files
+  content: ["./app/**/*.{js,jsx,ts,tsx}"], // Add the template files
   theme: {
     extend: {},
   },
   plugins: [],
-} satisfies Config
+} satisfies Config;
 ```
 
 Create `./app/tailwind.css` and add the tailwind directives

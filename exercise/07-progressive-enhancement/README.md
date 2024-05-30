@@ -1,4 +1,4 @@
-# 09. Progressive Enhancement
+# 07. Progressive Enhancement
 
 Remix is amazing. It's a fact! One of the things that makes it so awesome is the **Progressive Enhancement** principle.
 

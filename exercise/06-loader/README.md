@@ -1,4 +1,4 @@
-# 07. Loader
+# 06. Loader
 
 Once we get redirected to the confirmation page, we provide the `orderId` as query param. We want to display the `orderId` to
 it to the user so that he can follow the order progress.

@@ -1,4 +1,4 @@
-# 06. Action
+# 05. Action
 
 Once the form is submitted, an HTTP POST is sent to the current url but since there is a parent route
 for the index page (which is `root.tsx`) and Remix cannot just use the url to know which file should

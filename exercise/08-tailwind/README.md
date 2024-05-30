@@ -1,4 +1,4 @@
-# 04. Tailwind
+# 08. Tailwind
 
 To style our project we'd like to use Tailwind CSS.
 Since Remix uses Vite, most of the setup of Tailwind CSS is the same as the setup on the Vite project.

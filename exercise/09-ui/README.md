@@ -200,5 +200,46 @@ return (
 ```
 
 You can see here that `Button` takes the `as` attribute to switch the used tag/component under the hood. Here we want to use
-the Remix `Link` component to be styled as button. This concept of switching the used tag/component is called component
-polymorphism and is commonly used in component libraries like **MUI**, **Chakra UI**, etc.
+the Remix `Link` component to and style it as a button. This concept of switching the used tag/component is called component polymorphism and is commonly used in component libraries like **MUI**, **Chakra UI** etc.
+
+The page looks great but is still a little empty, let's add a preview of the pizza the customer is ordering. We can use the `PizzaPreview` component from the ui components for this:
+
+```jsx
+export default function Index() {
+  const actionData = useActionData<typeof action>();
+  // Add state management for the pizza preview
+  const [toppings, setToppings] = useState<string[]>([]);
+
+  const handleFormChange = (event: ChangeEvent<HTMLFormElement>) => {
+    const formData = new FormData(event.currentTarget);
+    const toppings = formData.getAll('toppings') as string[];
+    setToppings(toppings);
+  };
+
+  return (
+    <Layout
+      bottomSheet={
+        <Button form="pizza-form" type="submit" fullWidth>
+          Commander
+        </Button>
+      }
+    >
+      <Text className="mb-4" as="h2" size="2xl" weight="bold">
+        Remixez votre pizza
+      </Text>
+
+      {/* Use the state in the preview component */}
+      <PizzaPreview toppings={toppings} />
+
+      <Form
+        id="pizza-form"
+        method="POST"
+        action="?index"
+        onChange={handleFormChange} // update the pizza preview on every form change
+      >
+      {/* ... */}
+      </Form>
+    </Layout>
+  );
+}
+```

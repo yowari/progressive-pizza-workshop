@@ -4,6 +4,8 @@ import {
   type MetaFunction,
 } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
+import { ChangeEvent, useState } from "react";
+import { PizzaPreview } from "~/components/PizzaPreview";
 import { Button } from "~/components/ui/Button";
 import { Checkbox } from "~/components/ui/Checkbox";
 import { Flex } from "~/components/ui/Flex";
@@ -44,6 +46,14 @@ export async function action({ request }: ActionFunctionArgs) {
 
 export default function Index() {
   const actionData = useActionData<typeof action>();
+  // Add state management for the pizza preview
+  const [toppings, setToppings] = useState<string[]>([]);
+
+  const handleFormChange = (event: ChangeEvent<HTMLFormElement>) => {
+    const formData = new FormData(event.currentTarget);
+    const toppings = formData.getAll("toppings") as string[];
+    setToppings(toppings);
+  };
 
   return (
     <Layout
@@ -57,7 +67,15 @@ export default function Index() {
         Remixez votre pizza
       </Text>
 
-      <Form id="pizza-form" method="POST" action="?index">
+      {/* Use the state in the preview component */}
+      <PizzaPreview toppings={toppings} />
+
+      <Form
+        id="pizza-form"
+        method="POST"
+        action="?index"
+        onChange={handleFormChange} // update the pizza preview on every form change
+      >
         <fieldset className="my-4">
           <Text className="mb-4" as="legend" size="lg" weight="bold">
             Selectionnez la taille

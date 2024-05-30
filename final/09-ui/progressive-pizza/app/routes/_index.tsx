@@ -4,6 +4,13 @@ import {
   type MetaFunction,
 } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
+import { Button } from "~/components/ui/Button";
+import { Checkbox } from "~/components/ui/Checkbox";
+import { Flex } from "~/components/ui/Flex";
+import { Grid } from "~/components/ui/Grid";
+import { Layout } from "~/components/ui/Layout";
+import { Radio } from "~/components/ui/Radio";
+import { Text } from "~/components/ui/Text";
 
 export const meta: MetaFunction = () => {
   return [
@@ -39,51 +46,167 @@ export default function Index() {
   const actionData = useActionData<typeof action>();
 
   return (
-    <main>
-      <h2>Remixez votre pizza</h2>
+    <Layout
+      bottomSheet={
+        <Button form="pizza-form" type="submit" fullWidth>
+          Commander
+        </Button>
+      }
+    >
+      <Text className="mb-4" as="h2" size="2xl" weight="bold">
+        Remixez votre pizza
+      </Text>
 
-      <Form method="POST" action="?index">
-        <fieldset>
-          <legend>Selectionnez la taille</legend>
+      <Form id="pizza-form" method="POST" action="?index">
+        <fieldset className="my-4">
+          <Text className="mb-4" as="legend" size="lg" weight="bold">
+            Selectionnez la taille
+          </Text>
 
-          <label htmlFor="small">
-            <input id="small" type="radio" name="size" value="small" />
-            Small
-          </label>
+          <Flex>
+            <Radio
+              type="radio"
+              name="size"
+              value="small"
+              imageUrl="/sizes/small.svg"
+            >
+              Small
+            </Radio>
 
-          <label htmlFor="medium">
-            <input id="medium" type="radio" name="size" value="medium" />
-            Medium
-          </label>
+            <Radio
+              type="radio"
+              name="size"
+              value="medium"
+              imageUrl="/sizes/medium.svg"
+            >
+              Medium
+            </Radio>
 
-          <label htmlFor="large">
-            <input id="large" type="radio" name="size" value="large" />
-            Large
-          </label>
+            <Radio
+              type="radio"
+              name="size"
+              value="large"
+              imageUrl="/sizes/large.svg"
+            >
+              Large
+            </Radio>
+          </Flex>
+
           {actionData?.errors?.size && (
-            <p>
+            <Text size="sm" color="danger">
               <em>{actionData?.errors?.size}</em>
-            </p>
+            </Text>
           )}
         </fieldset>
 
-        <fieldset>
-          <legend>Choisissez votre garniture</legend>
+        <fieldset className="my-4">
+          <Text className="mb-4" as="legend" size="lg" weight="bold">
+            Choisissez votre garniture
+          </Text>
 
-          <label htmlFor="anchovy">
-            <input
-              id="anchovy"
-              type="checkbox"
+          <Grid>
+            <Checkbox
               name="toppings"
               value="anchovy"
-            />
-            Anchois
-          </label>
+              imageUrl="/toppings/anchovy.svg"
+            >
+              Anchois
+            </Checkbox>
 
-          {/* do the same and create checkboxes for: bacon, basil, chili, mozzarella, mushroom, olive, onion, pepper, pepperoni, sweetcorn, tomato */}
+            <Checkbox
+              name="toppings"
+              value="bacon"
+              imageUrl="/toppings/bacon.svg"
+            >
+              Bacon
+            </Checkbox>
+
+            <Checkbox
+              name="toppings"
+              value="basil"
+              imageUrl="/toppings/basil.svg"
+            >
+              Basilic
+            </Checkbox>
+
+            <Checkbox
+              name="toppings"
+              value="chili"
+              imageUrl="/toppings/chili.svg"
+            >
+              Piment
+            </Checkbox>
+
+            <Checkbox
+              name="toppings"
+              value="mozzarella"
+              imageUrl="/toppings/mozzarella.svg"
+            >
+              Mozzarella
+            </Checkbox>
+
+            <Checkbox
+              name="toppings"
+              value="mushroom"
+              imageUrl="/toppings/mushroom.svg"
+            >
+              Champignon
+            </Checkbox>
+
+            <Checkbox
+              name="toppings"
+              value="olive"
+              imageUrl="/toppings/olive.svg"
+            >
+              Olive
+            </Checkbox>
+
+            <Checkbox
+              name="toppings"
+              value="onion"
+              imageUrl="/toppings/onion.svg"
+            >
+              Oignon
+            </Checkbox>
+
+            <Checkbox
+              name="toppings"
+              value="pepper"
+              imageUrl="/toppings/pepper.svg"
+            >
+              Poivre
+            </Checkbox>
+
+            <Checkbox
+              name="toppings"
+              value="pepperoni"
+              imageUrl="/toppings/pepperoni.svg"
+            >
+              Pepperoni
+            </Checkbox>
+
+            <Checkbox
+              name="toppings"
+              value="sweetcorn"
+              imageUrl="/toppings/sweetcorn.svg"
+            >
+              Maïs
+            </Checkbox>
+
+            <Checkbox
+              name="toppings"
+              value="tomato"
+              imageUrl="/toppings/tomato.svg"
+            >
+              Tomate
+            </Checkbox>
+          </Grid>
         </fieldset>
-        <button type="submit">Commander</button>
+
+        <Button className="hidden md:inline-block" type="submit">
+          Commander
+        </Button>
       </Form>
-    </main>
+    </Layout>
   );
 }

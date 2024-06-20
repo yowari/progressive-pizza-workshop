@@ -51,6 +51,7 @@
   position: absolute;
   background-repeat: no-repeat;
   background-size: contain;
+  animation: fallIn 0.4s ease-in;
 }
 
 .pizza__topping--anchovy {
@@ -70,7 +71,8 @@
   left: 263px;
   top: 95px;
 }
-.pizza__topping--anchovy:nth-child(4), .pizza__topping--anchovy:nth-child(5) {
+.pizza__topping--anchovy:nth-child(4),
+.pizza__topping--anchovy:nth-child(5) {
   display: none;
 }
 
@@ -119,7 +121,8 @@
   left: 222px;
   top: 98px;
 }
-.pizza__topping--basil:nth-child(4), .pizza__topping--basil:nth-child(5) {
+.pizza__topping--basil:nth-child(4),
+.pizza__topping--basil:nth-child(5) {
   display: none;
 }
 
@@ -167,7 +170,8 @@
   left: 162px;
   top: 8px;
 }
-.pizza__topping--mozzarella:nth-child(4), .pizza__topping--mozzarella:nth-child(5) {
+.pizza__topping--mozzarella:nth-child(4),
+.pizza__topping--mozzarella:nth-child(5) {
   display: none;
 }
 .pizza__topping--mushroom {
@@ -314,7 +318,8 @@
   left: 212px;
   top: 146px;
 }
-.pizza__topping--sweetcorn:nth-child(4), .pizza__topping--sweetcorn:nth-child(5) {
+.pizza__topping--sweetcorn:nth-child(4),
+.pizza__topping--sweetcorn:nth-child(5) {
   display: none;
 }
 
@@ -341,4 +346,21 @@
 }
 .pizza__topping--tomato:nth-child(5) {
   display: none;
+}
+
+@keyframes fallIn {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  70% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  90% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }

@@ -13,17 +13,9 @@ We'll need to add a test script to our package.json file.
 },
 ```
 
-Vitest needs a setup file and some browser polyfills to run our tests. We will create these files in a folder called `test` in the root of our project:
+Vitest needs a setup file. We create the file in a folder called `test` in the root of our project:
 
-`polyfills.ts`:
-
-```typescript
-import { installGlobals } from "@remix-run/node";
-
-installGlobals();
-```
-
-`setup-test-env.ts`:
+`test/setup-test-env.ts`:
 
 ```typescript
 import "@testing-library/jest-dom/vitest";
@@ -50,7 +42,7 @@ export default defineConfig({
     include: ["./app/**/*.spec.{ts,tsx}"],
     globals: true,
     environment: "happy-dom",
-    setupFiles: ["./test/polyfills.ts", "./test/setup-test-env.ts"],
+    setupFiles: ["./test/setup-test-env.ts"],
   },
 });
 ```

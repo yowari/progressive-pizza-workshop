@@ -48,3 +48,5 @@ checkbox inputs for toppings selection.
     <button type="submit">Commander</button>
   </form>
 ```
+
+Once you submit the form you get **405 Method Not Allowed**. No worry, we will get over it on next exercise.

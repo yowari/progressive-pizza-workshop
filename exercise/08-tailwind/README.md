@@ -1,28 +1,10 @@
 # 08. Tailwind
 
 To style our project we'd like to use Tailwind CSS.
-Since Remix uses Vite, most of the setup of Tailwind CSS is the same as the setup on the Vite project.
+The default Remix template comes with Tailwind preconfigured but remember we disabled the Tailwind styling. It now time
+to put it back.
 
-```
-npm install -D tailwindcss postcss autoprefixer
-npx tailwindcss init --ts -p
-```
-
-In `tailwind.config.ts`, add the paths of the template files
-
-```typescript
-import type { Config } from "tailwindcss";
-
-export default {
-  content: ["./app/**/*.{js,jsx,ts,tsx}"], // Add the template files
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-} satisfies Config;
-```
-
-Create `./app/tailwind.css` and add the tailwind directives
+On `app/tailwind.css` put back the Tailwind directives
 
 ```css
 @tailwind base;
@@ -30,18 +12,11 @@ Create `./app/tailwind.css` and add the tailwind directives
 @tailwind utilities;
 ```
 
-In `./app/root.tsx` import the newly-created `./app/tailwind.css` file
+And that it!
 
-```typescript
-import type { LinksFunction } from "@remix-run/node";
-import stylesheet from "~/tailwind.css?url";
-
-export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: stylesheet },
-];
-```
-
-And that's it!
+If for some reason you hate Tailwind and you don't want to use it on your personal or professional project, you can
+remove it completely. After all, a Remix project is just a Vite project. You can reverse the Tailwind setup as showed in
+the guide on [Installing Tailwind CSS with Remix](https://tailwindcss.com/docs/guides/remix).
 
 For more integration like css-in-js solutions, you can check the
 [examples repository](https://github.com/remix-run/examples).

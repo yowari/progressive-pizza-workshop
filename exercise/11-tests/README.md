@@ -3,7 +3,7 @@
 We will eventually need to test our Remix application and here we use Vitest and React Testing Library for this purpose. We will also use the super fast [Happy DOM](https://github.com/capricorn86/happy-dom) to simulate the browser environment in our tests.
 Finally, Remix provides a testing library that we will use to test our routes, let's install these dependencies:
 
-`npm i -D @remix-run/testing @testing-library/jest-dom @testing-library/react @vitejs/plugin-react happy-dom vitest`
+`npm i -D @remix-run/testing @testing-library/jest-dom @testing-library/react @testing-library/user-event @vitejs/plugin-react happy-dom vitest`
 
 We'll need to add a test script to our package.json file.
 
@@ -87,16 +87,21 @@ We declare our application using the `createRemixStub`, and in the test we rende
 Now let's simulate ordering a pizza with the following test:
 
 ```tsx
+import userEvent from "@testing-library/user-event";
+
+// ...
+
 test("ordering a pizza", async () => {
   render(<App initialEntries={["/"]} initialIndex={0} />);
+  const user = userEvent.setup();
 
   const mediumPizzaRadio = await screen.findByRole("radio", {
     name: /medium/i,
   });
-  mediumPizzaRadio.click();
+  await user.click(mediumPizzaRadio);
 
   const orderButtons = await screen.findAllByRole("button");
-  orderButtons[0].click();
+  await user.click(orderButtons[0]);
 
   expect(await screen.findByText("Confirmation")).toBeInTheDocument();
 });

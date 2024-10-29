@@ -12,8 +12,8 @@
   "medium": "Medium",
   "order": "Order",
   "selectPizzaSize": "Select pizza size",
-  "selectSize": "Select size",
-  "selectToppings": "Select toppings",
+  "selectSize": "Select the size",
+  "selectToppings": "Choose the toppings",
   "small": "Small",
   "title": "Remix your pizza"
 }

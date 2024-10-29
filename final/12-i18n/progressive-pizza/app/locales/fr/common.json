@@ -8,12 +8,12 @@
   "error": {
     "sorry": "Nous sommes désolé"
   },
-  "large": "large",
-  "medium": "medium",
+  "large": "Large",
+  "medium": "Medium",
   "order": "Commander",
   "selectPizzaSize": "Veuillez selectionnez la taille de votre pizza",
   "selectSize": "Selectionnez la taille",
   "selectToppings": "Choisissez votre garniture",
-  "small": "small",
+  "small": "Small",
   "title": "Remixez votre pizza"
 }

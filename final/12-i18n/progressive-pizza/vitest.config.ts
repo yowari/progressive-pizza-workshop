@@ -12,6 +12,6 @@ export default defineConfig({
     include: ["./app/**/*.spec.{ts,tsx}"],
     globals: true,
     environment: "happy-dom",
-    setupFiles: ["./test/polyfills.ts", "./test/setup-test-env.ts"],
+    setupFiles: ["./test/setup-test-env.ts"],
   },
 });

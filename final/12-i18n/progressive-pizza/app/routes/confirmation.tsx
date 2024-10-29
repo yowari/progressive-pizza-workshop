@@ -44,7 +44,11 @@ export function ErrorBoundary() {
   console.error(error);
   return (
     <Layout center>
-      <Message title={t("error.sorry")} subtitle="Numéro de commande invalide" imageUrl="/sizes/medium.svg">
+      <Message
+        title={t("error.sorry")}
+        subtitle="Numéro de commande invalide"
+        imageUrl="/sizes/medium.svg"
+      >
         Veuillez repasser votre commande.
       </Message>
     </Layout>

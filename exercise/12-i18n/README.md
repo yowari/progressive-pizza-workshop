@@ -1,7 +1,7 @@
 # 12. I18n
 
 To make our project international, we are going to use react-i18n.
-To do so we are leveraging the work of [Sergio Xalambrí](https://github.com/sergiodxa) an heavy contributor to remix which created the [remix-18next](https://github.com/sergiodxa/remix-i18next) package.
+To do so we are leveraging the work of [Sergio Xalambrí](https://github.com/sergiodxa) a heavy contributor to remix who created the [remix-18next](https://github.com/sergiodxa/remix-i18next) package.
 
 ## package install
 
@@ -73,8 +73,6 @@ export default i18next;
 
 With this basic configuration we now need to add the I18nextProvider to both the `entry.client.tsx` and `entry.server.tsx`.
 
-Go to slide for explaination about those 2 files.
-
 Copy those files from the directory.
 
 Lastly, we need to load know the current local and save it. For that we are going to add a loader in our `./app/root.tsx`. This loader will check for the cookie and set it to the correct locale.
@@ -84,7 +82,10 @@ Add this :
 ```ts
 export async function loader({ request }: LoaderFunctionArgs) {
   const locale = await i18next.getLocale(request);
-  return json({ locale }, { headers: { "Set-Cookie": await i18nCookie.serialize(locale) } });
+  return json(
+    { locale },
+    { headers: { "Set-Cookie": await i18nCookie.serialize(locale) } }
+  );
 }
 ```
 

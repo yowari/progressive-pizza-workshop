@@ -15,7 +15,6 @@ import { createInstance } from "i18next";
 import i18next from "./i18next.server";
 import { I18nextProvider, initReactI18next } from "react-i18next";
 import { i18nConfig } from "./i18n";
-// import * as i18n from "./i18n";
 
 const ABORT_DELAY = 5_000;
 
@@ -30,8 +29,18 @@ export default function handleRequest(
   loadContext: AppLoadContext
 ) {
   return isbot(request.headers.get("user-agent") || "")
-    ? handleBotRequest(request, responseStatusCode, responseHeaders, remixContext)
-    : handleBrowserRequest(request, responseStatusCode, responseHeaders, remixContext);
+    ? handleBotRequest(
+        request,
+        responseStatusCode,
+        responseHeaders,
+        remixContext
+      )
+    : handleBrowserRequest(
+        request,
+        responseStatusCode,
+        responseHeaders,
+        remixContext
+      );
 }
 
 function handleBotRequest(
@@ -43,7 +52,11 @@ function handleBotRequest(
   return new Promise((resolve, reject) => {
     let shellRendered = false;
     const { pipe, abort } = renderToPipeableStream(
-      <RemixServer context={remixContext} url={request.url} abortDelay={ABORT_DELAY} />,
+      <RemixServer
+        context={remixContext}
+        url={request.url}
+        abortDelay={ABORT_DELAY}
+      />,
       {
         onAllReady() {
           shellRendered = true;
@@ -100,7 +113,11 @@ async function handleBrowserRequest(
     let shellRendered = false;
     const { pipe, abort } = renderToPipeableStream(
       <I18nextProvider i18n={instance}>
-        <RemixServer context={remixContext} url={request.url} abortDelay={ABORT_DELAY} />
+        <RemixServer
+          context={remixContext}
+          url={request.url}
+          abortDelay={ABORT_DELAY}
+        />
       </I18nextProvider>,
       {
         onShellReady() {
